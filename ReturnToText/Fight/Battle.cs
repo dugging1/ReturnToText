@@ -7,12 +7,20 @@ using ReturnToText.GUI;
 
 namespace ReturnToText.Fight {
 	enum BattleState{ Main, SkillList, ItemList, Target, End }
+
+	public struct BattleCommand {
+		Fighter caster;
+		//Skill skill;
+		Fighter target;
+	}
+
 	public class Battle {
 		Fighter[] T1;
 		Fighter[] T2;
 		bool Turn; //True=T1, False=T2
 		int current = 0;
 		static BattleState state = BattleState.Main;
+		BattleCommand currentCommand;
 
 		public Battle(Fighter[] Team1, Fighter[] Team2, bool turn=false) {
 			T1=Team1;
@@ -64,10 +72,36 @@ namespace ReturnToText.Fight {
 
 		#endregion
 
-		public void mainLoop() {
-			while (state!=BattleState.End) {
+		#region SkillList
 
+		static void SkillSelect(GUIButtonEntry sender) {
+			//TODO: Handle skill select
+		}
+
+		static void SkillReturn() {
+			state=BattleState.Main;
+		}
+
+		#endregion
+
+		void doTurn(Fighter f) {
+			if (f.Stats["HP"]==0) return;
+			//TODO: Finnish
+		}
+
+		public bool mainLoop() {
+			while (state!=BattleState.End) {
+				for (int i = 0; i<T1.Length; i++) {
+					doTurn(T1[i]);
+				}
+				for (int i = 0; i<T2.Length; i++) {
+					doTurn(T2[i]);
+				}
+				if (TeamDead(T1)) return true;
+				else return false;
 			}
+			//TODO: Handle escaping
+			return true;
 		}
 	}
 }
