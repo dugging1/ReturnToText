@@ -23,9 +23,9 @@ namespace ReturnToText.LittleLanguages.SkillInterpretation {
 			}
 		}
 
-		//public ISkillNode getTree() {
-
-		//}
+		public INode getTree() {
+			return Maths();
+		}
 
 		#region MathsDerivation
 
@@ -38,7 +38,7 @@ namespace ReturnToText.LittleLanguages.SkillInterpretation {
 			while (currentToken.Type==SkillType.PLUS||currentToken.Type==SkillType.MINUS) {
 				Token t = currentToken;
 				Eat(t.Type);
-				n=new BinOp(n,Add(), t);
+				n=new BinOp(n, Mult(), t);
 			}
 			return n;
 		}
@@ -48,7 +48,7 @@ namespace ReturnToText.LittleLanguages.SkillInterpretation {
 			while (currentToken.Type==SkillType.MULTI||currentToken.Type==SkillType.DIVIDE) {
 				Token t = currentToken;
 				Eat(t.Type);
-				n=new BinOp(n, Mult(), t);
+				n=new BinOp(n, Pow(), t);
 			}
 			return n;
 		}
@@ -63,7 +63,7 @@ namespace ReturnToText.LittleLanguages.SkillInterpretation {
 			while (currentToken.Type==SkillType.POWER) {
 				Token t = currentToken;
 				Eat(SkillType.POWER);
-				n=new BinOp(n, Mult(), t);
+				n=new BinOp(n, Pow(), t);
 			}
 			return n;
 		}

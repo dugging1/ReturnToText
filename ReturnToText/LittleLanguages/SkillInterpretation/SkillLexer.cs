@@ -14,11 +14,13 @@ namespace ReturnToText.LittleLanguages.SkillInterpretation {
 
 		public SkillLexer(string inp) {
 			input=inp;
-			currentPos=0;
+			currentPos=-1;
+			advance();
 		}
 
 		void advance() {
-			if (currentPos+1<input.Length) currentChar=input[currentPos++];
+			currentPos++;
+			if (currentPos<input.Length) currentChar=input[currentPos];
 			else currentChar='\0'; //NULL TERMINATING
 		}
 
@@ -98,7 +100,7 @@ namespace ReturnToText.LittleLanguages.SkillInterpretation {
 						return new Token() { Type=SkillType.T, Value='T' };
 					} else {
 						advance();
-						return new Token() { Type=SkillType.T, Value='C' };
+						return new Token() { Type=SkillType.C, Value='C' };
 					}
 				} else {
 					return Stat();
