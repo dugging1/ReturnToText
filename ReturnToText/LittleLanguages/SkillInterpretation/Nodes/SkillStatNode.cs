@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ReturnToText.Fight;
 
 namespace ReturnToText.LittleLanguages.SkillInterpretation.Nodes {
-	public class SkillStatNode : INode {
+	public class SkillStatNode : ISkillNode {
 		public SkillType fighterReferance;
 		public string Stat;
 

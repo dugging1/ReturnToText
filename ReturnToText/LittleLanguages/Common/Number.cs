@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ReturnToText.Fight;
+using ReturnToText.LittleLanguages.SkillInterpretation.Nodes;
 
-namespace ReturnToText.LittleLanguages.SkillInterpretation.Nodes {
-	public class Number : INode {
+namespace ReturnToText.LittleLanguages.Common {
+	public class Number : ISkillNode {
 		double value;
 
 		public Number(double val) {

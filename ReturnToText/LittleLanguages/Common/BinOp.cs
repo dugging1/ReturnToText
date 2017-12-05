@@ -4,14 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ReturnToText.Fight;
+using ReturnToText.LittleLanguages.SkillInterpretation.Nodes;
+using ReturnToText.LittleLanguages.SkillInterpretation;
 
-namespace ReturnToText.LittleLanguages.SkillInterpretation.Nodes {
-	public class BinOp : INode {
-		INode left;
-		INode right;
+namespace ReturnToText.LittleLanguages.Common {
+	public class BinOp : ISkillNode {
+		ISkillNode left;
+		ISkillNode right;
 		SkillType Operation;
 
-		public BinOp(INode l, INode r, Token op) {
+		public BinOp(ISkillNode l, ISkillNode r, Token op) {
 			left=l;
 			right=r;
 			Operation=op.Type;

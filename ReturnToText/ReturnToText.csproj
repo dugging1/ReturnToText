@@ -69,8 +69,10 @@
     <Compile Include="GUI\GUIController.cs" />
     <Compile Include="GUI\GUIElement.cs" />
     <Compile Include="LittleLanguages\Common\BinOp.cs" />
-    <Compile Include="LittleLanguages\Common\INode.cs" />
+    <Compile Include="LittleLanguages\Common\BlockNode.cs" />
+    <Compile Include="LittleLanguages\SkillInterpretation\Nodes\INode.cs" />
     <Compile Include="LittleLanguages\Common\Number.cs" />
+    <Compile Include="LittleLanguages\SkillInterpretation\Nodes\SkillAssignment.cs" />
     <Compile Include="LittleLanguages\SkillInterpretation\Nodes\SkillStatNode.cs" />
     <Compile Include="LittleLanguages\SkillInterpretation\SkillLexer.cs" />
     <Compile Include="LittleLanguages\SkillInterpretation\SkillParser.cs" />

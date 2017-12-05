@@ -1,4 +1,5 @@
-﻿using ReturnToText.LittleLanguages.SkillInterpretation.Nodes;
+﻿using ReturnToText.LittleLanguages.Common;
+using ReturnToText.LittleLanguages.SkillInterpretation.Nodes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,18 +24,41 @@ namespace ReturnToText.LittleLanguages.SkillInterpretation {
 			}
 		}
 
-		public INode getTree() {
-			return Maths();
+		public ISkillNode getTree() {
+			return Block();
+		}
+
+		ISkillNode Block() {
+			BlockNode b = new BlockNode();
+			while(currentToken.Type !=SkillType.EOF) {
+				b.AddStatement(Statement());
+				Eat(SkillType.SEMI);
+			}
+			return b;
+		}
+
+		ISkillNode Statement() {
+			if (Lexer.Peek().Type==SkillType.EQUALS) {
+				return Assignment();
+			} else {
+				return Maths();
+			}
+		}
+
+		ISkillNode Assignment() {
+			SkillStatNode n = Stat() as SkillStatNode;
+			Eat(SkillType.EQUALS);
+			return new SkillAssignment(n, Maths());
 		}
 
 		#region MathsDerivation
 
-		INode Maths() {
+		ISkillNode Maths() {
 			return Add();
 		}
 
-		INode Add() {
-			INode n = Mult();
+		ISkillNode Add() {
+			ISkillNode n = Mult();
 			while (currentToken.Type==SkillType.PLUS||currentToken.Type==SkillType.MINUS) {
 				Token t = currentToken;
 				Eat(t.Type);
@@ -43,8 +67,8 @@ namespace ReturnToText.LittleLanguages.SkillInterpretation {
 			return n;
 		}
 
-		INode Mult() {
-			INode n = Pow();
+		ISkillNode Mult() {
+			ISkillNode n = Pow();
 			while (currentToken.Type==SkillType.MULTI||currentToken.Type==SkillType.DIVIDE) {
 				Token t = currentToken;
 				Eat(t.Type);
@@ -53,8 +77,8 @@ namespace ReturnToText.LittleLanguages.SkillInterpretation {
 			return n;
 		}
 
-		INode Pow() {
-			INode n;
+		ISkillNode Pow() {
+			ISkillNode n;
 			if(currentToken.Type ==SkillType.LBRACKET) {
 				n=Brack();
 			} else {
@@ -68,14 +92,14 @@ namespace ReturnToText.LittleLanguages.SkillInterpretation {
 			return n;
 		}
 
-		INode Brack() {
+		ISkillNode Brack() {
 			Eat(SkillType.LBRACKET);
-			INode n = Maths();
+			ISkillNode n = Maths();
 			Eat(SkillType.RBRACKET);
 			return n;
 		}
 
-		INode Num() {
+		ISkillNode Num() {
 			if (currentToken.Type==SkillType.NUM) {
 				return Lit();
 			} else {
@@ -83,7 +107,7 @@ namespace ReturnToText.LittleLanguages.SkillInterpretation {
 			}
 		}
 
-		INode Lit() {
+		ISkillNode Lit() {
 			double v = Convert.ToDouble(currentToken.Value);
 			Eat(SkillType.NUM);
 			if (currentToken.Type==SkillType.POINT) {
@@ -95,7 +119,7 @@ namespace ReturnToText.LittleLanguages.SkillInterpretation {
 			return new Number(v);
 		}
 
-		INode Stat() {
+		ISkillNode Stat() {
 			SkillType t;
 			if (currentToken.Type==SkillType.C) {
 				t=SkillType.C;

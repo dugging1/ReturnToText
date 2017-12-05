@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ReturnToText.LittleLanguages.SkillInterpretation.Nodes {
-	public interface INode {
+	public interface ISkillNode {
 		object Execute(SkillContext c);
 	}
 }
