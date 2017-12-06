@@ -6,18 +6,19 @@ using System.Threading.Tasks;
 
 namespace ReturnToText {
 	public class Map {
-		
 
-		readonly int Width;
-		readonly int Height;
+		public readonly int ID;
+		public readonly int Width;
+		public readonly int Height;
 
 		public Tile[] Mapping;
 
 		int[] playerLoc;
 
-		public Map(int width, int height) {
+		public Map(int width, int height, int id) {
 			Width=width;
 			Height=height;
+			ID=id;
 			Mapping=new Tile[Width*Height];
 		}
 

@@ -71,7 +71,7 @@ namespace ReturnToText {
 				}
 			}
 
-			Map ret = new Map(w, h);
+			Map ret = new Map(w, h, Convert.ToInt32(mapID));
 			ret.GenerateMap(vis, reg, tileSet);
 			return ret;
 		}
@@ -88,6 +88,22 @@ namespace ReturnToText {
 				else pass[i]=true;
 			}
 			return new Tile() { Display=r.GetString(1)[0], Passable=pass };
+		}
+
+		public Skill getSkill(string skillID) {
+			SQLiteCommand command = new SQLiteCommand("SELECT * FROM Skill WHERE ID="+skillID, data);
+			SQLiteDataReader r = command.ExecuteReader();
+			if (!r.HasRows) throw new ArgumentOutOfRangeException("skillID", skillID, "Skill given cannot be found.");
+			r.Read();
+
+			Skill ret = new Skill() {
+				Name=r.GetString(1),
+				MPConsumption=r.GetInt32(2),
+				HPConsumption=r.GetInt32(3),
+				extraData=new Stats(r.GetString(4))
+			};
+			ret.interpretEffect(r.GetString(5));
+			return ret;
 		}
 	}
 }

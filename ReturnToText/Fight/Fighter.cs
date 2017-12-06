@@ -10,6 +10,7 @@ namespace ReturnToText.Fight {
 		public bool isAI;
 		public doTurn AI;
 		public string Name;
+		public List<Skill> Skills = new List<Skill>();
 
 		public delegate void doTurn(Fighter self, Fighter[] Ally, Fighter[] Enemy);
 
@@ -18,6 +19,5 @@ namespace ReturnToText.Fight {
 			this.isAI=isAI;
 			this.AI=AI;
 		}
-
 	}
 }

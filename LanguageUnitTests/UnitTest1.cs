@@ -6,7 +6,8 @@ using System.Collections.Generic;
 
 namespace LanguageUnitTests {
 	[TestClass]
-	public class UnitTest1 {
+	public class UnitTest1 { 
+		//TODO: Unit test Stats assignment
 
 		[TestCategory("Skill Language")]
 		[TestMethod]

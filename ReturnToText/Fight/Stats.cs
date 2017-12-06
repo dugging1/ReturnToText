@@ -22,5 +22,19 @@ namespace ReturnToText.Fight {
 				stats[StatNames[i]]=s[i];
 			}
 		}
+
+		public Stats(string s) {
+			string[] S = s.Split(',');
+			int[] t = new int[S.Length];
+			for (int i = 0; i<S.Length; i++) {
+				t[i]=Convert.ToInt32(S[i]);
+			}
+
+			if (t.Length!=StatNames.Length) throw new ArgumentOutOfRangeException("s", "The number of stats passed does not match the StatNames array length.");
+			stats=new Dictionary<string, int>();
+			for (int i = 0; i<StatNames.Length; i++) {
+				stats[StatNames[i]]=s[i];
+			}
+		}
 	}
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ReturnToText.LittleLanguages.SkillInterpretation;
+using ReturnToText.LittleLanguages.SkillInterpretation.Nodes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +17,12 @@ namespace ReturnToText.Fight {
 		public int MPConsumption;
 		public int HPConsumption;
 		public Stats extraData;
+		public ISkillNode effect;
+
+		public void interpretEffect(string effect) {
+			SkillLexer lex = new SkillLexer(effect);
+			SkillParser parser = new SkillParser(lex);
+			this.effect=parser.getTree();
+		}
 	}
 }

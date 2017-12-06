@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database.cs" />
+    <Compile Include="Event.cs" />
     <Compile Include="Fight\Battle.cs" />
     <Compile Include="Fight\Fighter.cs" />
     <Compile Include="Fight\Skill.cs" />
@@ -68,20 +69,21 @@
     <Compile Include="GUI\GUIButtonEntry.cs" />
     <Compile Include="GUI\GUIController.cs" />
     <Compile Include="GUI\GUIElement.cs" />
-    <Compile Include="LittleLanguages\Common\BinOp.cs" />
-    <Compile Include="LittleLanguages\Common\BlockNode.cs" />
-    <Compile Include="LittleLanguages\SkillInterpretation\Nodes\INode.cs" />
-    <Compile Include="LittleLanguages\Common\Number.cs" />
+    <Compile Include="LittleLanguages\SkillInterpretation\Nodes\BinOp.cs" />
+    <Compile Include="LittleLanguages\SkillInterpretation\Nodes\BlockNode.cs" />
+    <Compile Include="LittleLanguages\SkillInterpretation\Nodes\ISkillNode.cs" />
+    <Compile Include="LittleLanguages\SkillInterpretation\Nodes\Number.cs" />
     <Compile Include="LittleLanguages\SkillInterpretation\Nodes\SkillAssignment.cs" />
     <Compile Include="LittleLanguages\SkillInterpretation\Nodes\SkillStatNode.cs" />
     <Compile Include="LittleLanguages\SkillInterpretation\SkillLexer.cs" />
     <Compile Include="LittleLanguages\SkillInterpretation\SkillParser.cs" />
-    <Compile Include="LittleLanguages\Common\Token.cs" />
+    <Compile Include="LittleLanguages\SkillInterpretation\Nodes\Token.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screen.cs" />
+    <Compile Include="StandardEvents.cs" />
     <Compile Include="Tile.cs" />
   </ItemGroup>
   <ItemGroup>

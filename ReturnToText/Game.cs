@@ -31,8 +31,8 @@ namespace ReturnToText {
 			get { return new ConsoleKey[] { Keys["PositiveY"], Keys["NegativeY"], Keys["PositiveX"], Keys["NegativeX"] }; }
 		}
 
-		static Map Level;
-		static GUIController Menu;
+		public static Map Level;
+		public static GUIController Menu;
 
 		public Game() {
 			Console.CursorVisible=false;
