@@ -7,7 +7,7 @@ using ReturnToText.Fight;
 using ReturnToText.LittleLanguages.SkillInterpretation.Nodes;
 using ReturnToText.LittleLanguages.SkillInterpretation;
 
-namespace ReturnToText.LittleLanguages.Common {
+namespace ReturnToText.LittleLanguages.SkillInterpretation {
 	public class BinOp : ISkillNode {
 		ISkillNode left;
 		ISkillNode right;

@@ -37,25 +37,30 @@ namespace ReturnToText {
 
 		public void Flip() {
 			string Buffer = buffer.ToString();
-			//try {
-			//	Console.SetBufferSize(Buffer.IndexOf('\n')+1, Buffer.Count((c) => c=='\n')+1);
-			//} catch (ArgumentOutOfRangeException) { }
+			
 			int x = 0;
 			int y = 0;
-			for(int i = 0; i<buffer.Length; i++) {
-				if (i<OnScreen.Length) {
+			for(int i = 0; i<Math.Max(buffer.Length, OnScreen.Length); i++) {
+				if (i<OnScreen.Length && i<buffer.Length) {
 					if(Buffer[i] !=OnScreen[i]) {
 						Console.SetCursorPosition(x, y);
 						Console.Write(Buffer[i]);
 					}
-				} else {
+				} else if(i>=OnScreen.Length) {
 					string t = Buffer.Substring(i);
 					Console.SetCursorPosition(x, y);
 					Console.Write(t);
 					break;
+				} else if (i>=buffer.Length) {
+					Console.SetCursorPosition(x, y);
+					Console.Write(new string(' ', OnScreen.Length-buffer.Length));
+					break;
 				}
 				x++;
-				if (Buffer[i]=='\n') { x=0;y++; }
+				if (Buffer[i]=='\n') {
+					x=0;
+					y++;
+				}
 			}
 			OnScreen=Buffer;
 			buffer.Clear();

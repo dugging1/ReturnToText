@@ -75,6 +75,7 @@ namespace ReturnToText {
 				return;
 			}
 			//On successful move
+			Mapping[playerLoc[1]*Width+playerLoc[0]].doEvents();
 		}
 	}
 }

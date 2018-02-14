@@ -13,7 +13,7 @@ namespace ReturnToText {
 	class Game {
 
 		static void Main(string[] args) {
-			Instance=new Game();
+			new Game();
 		}
 
 		public static Game Instance;
@@ -35,6 +35,7 @@ namespace ReturnToText {
 		public static GUIController Menu;
 
 		public Game() {
+			Instance = this;
 			Console.CursorVisible=false;
 			new Player();
 			Thread Rend = new Thread(new ThreadStart(Render)) {
@@ -46,7 +47,7 @@ namespace ReturnToText {
 			};
 			Inp.Start();
 			Level=Data.getMap("0");
-			Level.setPlayerLoc(3, 3);
+			Level.setPlayerLoc(3, 5);
 			Tick();
 		}
 
@@ -72,7 +73,10 @@ namespace ReturnToText {
 				time.Restart();
 
 				if (screenBuffer.Count!=0) {
-					string frame = screenBuffer.Dequeue();
+					string frame;
+					lock (screenBuffer) {
+						frame = screenBuffer.Dequeue();
+					}
 					screen.Write(frame, 0);
 					screen.Flip();
 				} else {
@@ -94,12 +98,18 @@ namespace ReturnToText {
 				screenBuffer.Enqueue(frame);
 			}
 		}
+		public static void ClearDisplay() {
+			Console.Clear();
+		}
 
 		#endregion
 
 		public void Tick() {
 			while (Running) {
-				Display(Level.getDisplay());
+				if (GameState == STATE.MAP)
+					Display(Level.getDisplay());
+				else if (GameState == STATE.MENU)
+					Display(Menu.Display());
 				if (Inputs.Count>4) {
 					handleInputs(4);
 				} else {
@@ -116,11 +126,12 @@ namespace ReturnToText {
 						//Movement (Map)
 						Level.doMovement(inp);
 					}else if (GameState==STATE.MENU) {
-						//Movement (Menu
+						//Movement (Menu)
 						Menu.doInput(inp);
 					}
 				}
 			}
 		}
+
 	}
 }

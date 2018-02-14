@@ -81,13 +81,36 @@ namespace ReturnToText {
 			SQLiteDataReader r = command.ExecuteReader();
 			if (!r.HasRows) throw new ArgumentOutOfRangeException("tileID", tileID, "Tile given cannot be found.");
 			r.Read();
+
 			string[] tmp = r.GetString(2).Split(',');
 			bool[] pass = new bool[4];
 			for (int i = 0; i<4; i++) {
 				if (tmp[i]=="0") pass[i]=false;
 				else pass[i]=true;
 			}
-			return new Tile() { Display=r.GetString(1)[0], Passable=pass };
+
+			List<Event> Es = new List<Event>();
+			foreach (string id in Convert.ToString(r.GetValue(3)).Split(',')) {
+				if(id != "") Es.Add(getEvent(id));
+			}
+			return new Tile() { Display=r.GetString(1)[0], Passable=pass, Events=Es.ToArray() };
+		}
+
+		public Event getEvent(string eventID) {
+			SQLiteCommand command = new SQLiteCommand("SELECT * FROM Event WHERE ID="+eventID, data);
+			SQLiteDataReader r = command.ExecuteReader();
+			if (!r.HasRows) throw new ArgumentOutOfRangeException("eventID", eventID, "Event given cannot be found.");
+			r.Read();
+			string idStr = r.GetString(1);
+			int id = 0;
+			if (idStr.Contains("ID=")) {
+				id = Convert.ToInt32(idStr.Substring(3));
+			} else {
+				throw new NotImplementedException("Event language not implemented.");
+			}
+			string[] args = r.GetString(2).Split(',');
+
+			return new Event(id, args);
 		}
 
 		public Skill getSkill(string skillID) {

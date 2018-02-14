@@ -9,7 +9,7 @@ namespace ReturnToText.GUI {
 		public delegate void GUIReturnCB();
 
 		public GUIElement[] elements = new GUIElement[0];
-		int cursorPos = 0;
+		public int cursorPos = 0;
 		public static bool Running = true;
 		public int minCursor = 0;
 		public int maxCursor = 0;
@@ -42,7 +42,7 @@ namespace ReturnToText.GUI {
 			if (cursorPos>=maxCursor) cursorPos=maxCursor;
 		}
 
-		string Display() {
+		public string Display() {
 			StringBuilder ret = new StringBuilder();
 			for (int i = 0; i<elements.Length; i++) {
 				if (cursorPos==i) ret.Append(" --> ");

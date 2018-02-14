@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ReturnToText.Fight;
 using ReturnToText.LittleLanguages.SkillInterpretation.Nodes;
 
-namespace ReturnToText.LittleLanguages.Common {
+namespace ReturnToText.LittleLanguages.SkillInterpretation {
 	public class Number : ISkillNode {
 		double value;
 

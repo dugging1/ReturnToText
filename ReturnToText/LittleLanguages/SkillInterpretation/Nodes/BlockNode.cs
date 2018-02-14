@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ReturnToText.Fight;
 
-namespace ReturnToText.LittleLanguages.Common {
+namespace ReturnToText.LittleLanguages.SkillInterpretation {
 	public class BlockNode : ISkillNode {
 		public List<ISkillNode> statements = new List<ISkillNode>();
 

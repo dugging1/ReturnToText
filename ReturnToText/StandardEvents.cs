@@ -22,19 +22,23 @@ namespace ReturnToText {
 			GUIController g = new GUIController();
 			GUIElement[] ele = new GUIElement[args.Length+2];
 			for (int i = 0; i<args.Length; i++) {
-				ele[i]=new GUIButtonEntry(args[i], null);
+				ele[i]=new GUIButtonEntry(args[i], endTextButtonCB, Game.GameState);
 			}
-			ele[ele.Length-2]=new GUIButtonEntry("", null);
+			ele[ele.Length-2]=new GUIButtonEntry("", endTextButtonCB, Game.GameState);
 			ele[ele.Length-1]=new GUIButtonEntry("Return", endTextButtonCB, Game.GameState);
 			g.elements=ele;
 			g.minCursor=ele.Length-1;
+			g.maxCursor=ele.Length-1;
+			g.cursorPos=ele.Length-1;
 			Game.Menu=g;
 			Game.GameState=STATE.MENU;
+			Game.ClearDisplay();
 		}
 
-		static void endTextButtonCB(GUIButtonEntry sender) {
+		static void endTextButtonCB(GUIButtonEntry sender) { //Button Callback for Text Event
 			Game.GameState=(STATE)sender.data;
 			Game.Menu=null;
+			Game.ClearDisplay();
 		}
 
 		public static void changeTileEvent(string[] args) {

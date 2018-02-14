@@ -12,7 +12,7 @@ namespace ReturnToText {
 		string[] arguments;
 		int ID = -1;
 
-		public Event(int id, params string[] args) {
+		public Event(int id, string[] args) {
 			ID=id;
 			arguments=args;
 		}
@@ -22,7 +22,7 @@ namespace ReturnToText {
 			arguments=args.Split(';');
 		}
 
-		public void execute() {
+		public void execute() { //Not yet used
 			StdEffects[ID](arguments);
 		}
 	}

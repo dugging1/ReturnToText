@@ -10,6 +10,7 @@ namespace ReturnToText {
 		public bool[] Passable = new bool[] { true, true, true, true }; //Passable from N,E,S,W
 		public string EnemySpawnRegion;
 		public bool hasPlayer = false;
+		public Event[] Events;
 
 		public char Display{
 			get {
@@ -27,6 +28,14 @@ namespace ReturnToText {
 			Passable=new bool[] { p.Passable[0], p.Passable[1], p.Passable[2], p.Passable[3] };
 			EnemySpawnRegion=p.EnemySpawnRegion;
 			hasPlayer=p.hasPlayer;
+			Events=p.Events; //Beware shallow copy
+		}
+
+		public void doEvents() {
+			if (Events == null) return;
+			foreach (Event e in Events) {
+				e.execute();
+			}
 		}
 	}
 }
